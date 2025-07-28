@@ -24,22 +24,22 @@ export const connectDB = async () => {
   while (attempts < MAX_RETRIES) {
     try {
       await sequelize.authenticate();
-      console.log("PostgreSQL connected successfully✅");
+      console.log("PostgreSQL connected successfully");
       await sequelize.sync( {force: false});
-      console.log("🔄 Models synchronized");
+      console.log("Models synchronized");
       return;
     } catch (error) {
       attempts++;
       console.error(
-        `DB connection failed (attempt ${attempts}): ${error.message}❌`
+        `DB connection failed (attempt ${attempts}): ${error.message}`
       );
 
       if (attempts >= MAX_RETRIES) {
-        console.error("Maximum retry attempts reached. Exiting...🛑");
+        console.error("Maximum retry attempts reached. Exiting...");
         process.exit(1);
       }
 
-      console.log(`Retrying in ${RETRY_DELAY_MS / 1000} seconds...⏳`);
+      console.log(`Retrying in ${RETRY_DELAY_MS / 1000} seconds...`);
       await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS));
     }
   }

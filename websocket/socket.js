@@ -1,4 +1,4 @@
-﻿// Setup WebSocket server
+﻿
 import { Server } from "socket.io";
 
 let io;
@@ -12,11 +12,11 @@ export const setupSocket = (server) => {
   });
 
   io.on("connection", (socket) => {
-    console.log("🟢 Client connected:", socket.id);
+    console.log("Client connected:", socket.id);
 
     socket.on("joinRoom", (roomId) => {
       socket.join(roomId);
-      console.log(`📥 ${socket.id} joined room ${roomId}`);
+      console.log(`${socket.id} joined room ${roomId}`);
     });
 
     socket.on("chatMessage", (data) => {
@@ -25,7 +25,7 @@ export const setupSocket = (server) => {
     });
 
     socket.on("disconnect", () => {
-      console.log("🔴 Client disconnected:", socket.id);
+      console.log("Client disconnected:", socket.id);
     });
   });
 
